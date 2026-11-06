@@ -69,7 +69,7 @@ const clusters=[[110,373.4,268,454.5],[106,549.2,268,630.3],[331.9,373.4,486,454
 for(const r of clusters){const q=deskTop(r,M.wood);box(q.X,.74,q.Z,.03,.24,q.d*.96,steel)}
 
 // Chỗ ngồi: [x, y chỗ ngồi PDF, x, y điểm nhìn PDF, tên cố định, chức vụ]. 1–3 là quản lý (người thật), 4 bàn nhân viên, 5–20 bốn cụm bàn.
-const seatDefs=[[332,143,378,143,'A QUÂN','Giám đốc'],[464,150,422,150,'A PHƯỚC','Kỹ sư chạy vặt'],[476,232,476,274,'A QUỐC','Chuyên gia bào'],[154,742,112,742]];
+const seatDefs=[[332,143,378,143,'A QUAN','Giám đốc'],[464,150,422,150,'A PHƯỚC','Kỹ sư chạy vặt'],[476,232,476,274,'A QUỐC','Chuyên gia bào'],[154,742,112,742]];
 for(const [x0,y0,x1,y1] of clusters)for(const f of[.25,.75]){const px=x0+(x1-x0)*f,cy=(y0+y1)/2;seatDefs.push([px,y0-22,px,cy],[px,y1+22,px,cy])}
 seatDefs.push([218,743,218,786]); // ghế 21: bàn cạnh cửa
 const seats=[];seatDefs.forEach(([px,py,tx,ty,fixed,fixedRole],i)=>{const id=i+1,[X,Z]=P(px,py),[TX,TZ]=P(tx,ty),rot=face(X,Z,TX,TZ);rig(X,Z,rot);seats.push({id,obj:person(X,Z,id,rot),label:null,x:X,z:Z,fixed,fixedRole})});
