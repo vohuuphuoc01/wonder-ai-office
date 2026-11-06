@@ -86,7 +86,7 @@ const liveSt=a=>a.flag?'review':a.status==='active'?'working':'available';const 
 function ago(t){if(!t)return '';const m=Math.round(((liveState?.now||Date.now())-t)/60000);return m<1?'vừa xong':m<60?m+' phút trước':m<1440?Math.round(m/60)+' giờ trước':Math.round(m/1440)+' ngày trước'}
 // Người thật dùng nhiều phiên AI: gộp các phiên (theo tên phiên) về một nhân vật ngồi cố định một chỗ.
 const SEAT_LOCK={1:1,2:1,3:1};
-const PEOPLE=[{key:'p-phuoc',name:'PHƯỚC-HVAC',role:'Kỹ sư HVAC',seat:9,sessions:['LINH TINH','MVAC-AI'],aliases:['Võ Hữu Phước']}];
+const PEOPLE=[{key:'p-phuoc',name:'A PHƯỚC',role:'Kỹ sư chạy vặt',seat:2,sessions:['LINH TINH','MVAC-AI'],aliases:['Võ Hữu Phước']}];
 // Người thật luôn ngồi đúng ghế của mình, kể cả khi không có phiên AI nào đang chạy (vd trang GitHub).
 for(const p of PEOPLE){const s=seats.find(x=>x.id===p.seat);if(s){s.fixed=p.name;s.fixedRole=p.role}}
 function mergeAgents(agents){const out=[],by={};for(const a of agents){const p=PEOPLE.find(p=>p.sessions.includes(a.name));if(!p){out.push(a);continue}let m=by[p.key];if(!m){m=by[p.key]={key:p.key,name:p.name,role:p.role,platform:a.platform,status:'idle',flag:null,lastActive:0,lastText:'',lastTextAt:0,sessions:[],seat:p.seat};out.push(m)}m.sessions.push(a);if(a.status==='active')m.status='active';m.flag=m.flag||a.flag;m.lastActive=Math.max(m.lastActive,a.lastActive||0);if((a.lastTextAt||0)>m.lastTextAt){m.lastTextAt=a.lastTextAt;m.lastText=a.lastText}}return out}
